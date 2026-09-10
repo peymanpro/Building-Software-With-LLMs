@@ -1,0 +1,48 @@
+﻿# Build output
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio / Rider / VS Code
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Test results
+TestResults/
+*.trx
+
+# Coverage
+coverage/
+.coverage
+*.coverage
+*.coveragexml
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+
+# ASP.NET Core
+wwwroot/lib/
+Properties/serviceDependencies*.json
+Properties/launchSettings.json.user
+
+# Local environment / secrets
+.env
+.env.*
+!.env.example
+secrets.json
+secrets.*.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
