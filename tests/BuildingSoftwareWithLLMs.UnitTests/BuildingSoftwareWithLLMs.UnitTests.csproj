@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\BuildingSoftwareWithLLMs.Domain\BuildingSoftwareWithLLMs.Domain.csproj" />
     <ProjectReference Include="..\..\src\BuildingSoftwareWithLLMs.Application\BuildingSoftwareWithLLMs.Application.csproj" />
+    <ProjectReference Include="..\..\src\BuildingSoftwareWithLLMs.Infrastructure\BuildingSoftwareWithLLMs.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
