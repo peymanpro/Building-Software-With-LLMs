@@ -68,6 +68,11 @@ public sealed class LlmChatService : ILlmChatService
 
             providerCalls++;
 
+            history.Add(new LlmMessage(
+                LlmRole.Assistant,
+                response.Content,
+                response.ToolCalls));
+
             if (!response.HasToolCalls)
             {
                 return new LlmChatResult(
@@ -76,11 +81,6 @@ public sealed class LlmChatService : ILlmChatService
                     providerCalls,
                     toolCallsExecuted);
             }
-
-            history.Add(new LlmMessage(
-                LlmRole.Assistant,
-                response.Content,
-                response.ToolCalls));
 
             foreach (var toolCall in response.ToolCalls)
             {
