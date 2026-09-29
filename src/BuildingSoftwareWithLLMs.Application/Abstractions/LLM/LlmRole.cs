@@ -1,8 +1,9 @@
-﻿namespace BuildingSoftwareWithLLMs.Application.Abstractions.LLM;
+namespace BuildingSoftwareWithLLMs.Application.Abstractions.LLM;
 
 public enum LlmRole
 {
     System,
     User,
-    Assistant
+    Assistant,
+    Tool
 }

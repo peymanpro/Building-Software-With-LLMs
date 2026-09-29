@@ -1,4 +1,4 @@
-﻿namespace BuildingSoftwareWithLLMs.Application.Abstractions.LLM;
+namespace BuildingSoftwareWithLLMs.Application.Abstractions.LLM;
 
 public sealed record LlmRequest
 {
@@ -6,7 +6,8 @@ public sealed record LlmRequest
         string model,
         IReadOnlyList<LlmMessage> messages,
         double? temperature = null,
-        int? maxOutputTokens = null)
+        int? maxOutputTokens = null,
+        IReadOnlyList<LlmToolDefinition>? tools = null)
     {
         if (string.IsNullOrWhiteSpace(model))
         {
@@ -43,6 +44,7 @@ public sealed record LlmRequest
         Messages = messages;
         Temperature = temperature;
         MaxOutputTokens = maxOutputTokens;
+        Tools = tools ?? [];
     }
 
     public string Model { get; }
@@ -52,4 +54,6 @@ public sealed record LlmRequest
     public double? Temperature { get; }
 
     public int? MaxOutputTokens { get; }
+
+    public IReadOnlyList<LlmToolDefinition> Tools { get; }
 }
