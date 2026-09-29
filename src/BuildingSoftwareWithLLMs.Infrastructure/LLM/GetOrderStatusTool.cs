@@ -1,16 +1,26 @@
 using System.Text.Json;
 using BuildingSoftwareWithLLMs.Application.Abstractions.LLM;
+using BuildingSoftwareWithLLMs.Domain.Orders;
 
 namespace BuildingSoftwareWithLLMs.Infrastructure.LLM;
 
 public sealed class GetOrderStatusTool : ILlmTool
 {
-    private static readonly IReadOnlyDictionary<string, OrderRecord> Orders =
-        new Dictionary<string, OrderRecord>(StringComparer.OrdinalIgnoreCase)
+    private static readonly IReadOnlyDictionary<string, Order> Orders =
+        new Dictionary<string, Order>(StringComparer.OrdinalIgnoreCase)
         {
-            ["ORD-1001"] = new("ORD-1001", "Shipped", "The order left the fulfillment center."),
-            ["ORD-1002"] = new("ORD-1002", "Delayed", "The carrier reported a delivery delay."),
-            ["ORD-1003"] = new("ORD-1003", "Delivered", "The order was delivered to the customer.")
+            ["ORD-1001"] = new(
+                "ORD-1001",
+                OrderStatus.Shipped,
+                "The order left the fulfillment center."),
+            ["ORD-1002"] = new(
+                "ORD-1002",
+                OrderStatus.Delayed,
+                "The carrier reported a delivery delay."),
+            ["ORD-1003"] = new(
+                "ORD-1003",
+                OrderStatus.Delivered,
+                "The order was delivered to the customer.")
         };
 
     public LlmToolDefinition Definition { get; } =
@@ -40,7 +50,10 @@ public sealed class GetOrderStatusTool : ILlmTool
 
         var orderId = arguments
             .FirstOrDefault(argument =>
-                string.Equals(argument.Name, "orderId", StringComparison.OrdinalIgnoreCase))
+                string.Equals(
+                    argument.Name,
+                    "orderId",
+                    StringComparison.OrdinalIgnoreCase))
             ?.Value;
 
         if (string.IsNullOrWhiteSpace(orderId))
@@ -62,9 +75,9 @@ public sealed class GetOrderStatusTool : ILlmTool
         return Task.FromResult(JsonSerializer.Serialize(new
         {
             found = true,
-            orderId = order.OrderId,
-            status = order.Status,
-            message = order.Message
+            orderId = order.Id,
+            status = order.Status.ToString(),
+            message = order.StatusMessage
         }));
     }
 
@@ -78,9 +91,4 @@ public sealed class GetOrderStatusTool : ILlmTool
                 message
             }
         });
-
-    private sealed record OrderRecord(
-        string OrderId,
-        string Status,
-        string Message);
 }
