@@ -235,11 +235,11 @@ public sealed class OpenAiCompatibleLlmProvider : ILLMProvider
 
     private sealed record ChoiceResponse(
         MessageResponse Message,
-        string? FinishReason);
+        [property: JsonPropertyName("finish_reason")] string? FinishReason);
 
     private sealed record MessageResponse(
         string? Content,
-        IReadOnlyList<ToolCallResponse>? ToolCalls);
+        [property: JsonPropertyName("tool_calls")] IReadOnlyList<ToolCallResponse>? ToolCalls);
 
     private sealed record ToolCallResponse(
         string Id,
@@ -250,6 +250,6 @@ public sealed class OpenAiCompatibleLlmProvider : ILLMProvider
         string? Arguments);
 
     private sealed record UsageResponse(
-        int PromptTokens,
-        int CompletionTokens);
+        [property: JsonPropertyName("prompt_tokens")] int PromptTokens,
+        [property: JsonPropertyName("completion_tokens")] int CompletionTokens);
 }
