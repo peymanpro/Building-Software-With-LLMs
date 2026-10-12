@@ -171,3 +171,10 @@ docs/
 The repository has moved beyond the initial contract-only baseline and now contains an end-to-end, locally testable LLM application path, including tool calling, a real HTTP provider seam, API exposure, evaluation coverage, documentation, and CI.
 
 See `docs/adr/` for the architectural decisions behind the main boundaries.
+
+## Related engineering work
+
+- [Production Agent Systems](https://github.com/peymanpro/Production-Agent-Systems) extends the discussion toward agent runtime policy, tool permissions, retries, checkpoints, recovery, and replay.
+- [AI Evaluation Engineering](https://github.com/peymanpro/AI-Evaluation-Engineering) focuses on reusable graders, statistical comparisons, and regression gates.
+
+These projects are complementary, independently runnable repositories—not runtime dependencies of this application.
